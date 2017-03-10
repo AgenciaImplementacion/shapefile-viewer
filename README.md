@@ -1,21 +1,41 @@
 # openlayers-webpack
-Base of web viewer.
+Visor web básico de datos geográficos.
 
-This example demonstrates how the `ol` package can be used with webpack 2.
+# Requerimientos
 
-Clone the project.
+- Webpack 2
+- nodejs
+- npm
+- Openlayers 4
 
-    git clone git@gist.github.com:79025aef325cd2837364400a105405b8.git ol-webpack
+# Entorno de desarrollo
+1) Clonar el proyecto.
 
-Install the project dependencies.
+```bash
+git clone https://github.com/AgenciaImplementacion/openlayers-webpack
+```
 
-    cd ol-webpack
-    npm install
+2) Instalar las dependencias.
 
-Create a bundle for the browser.
+```bash
+cd openlayers-webpack
+npm install
+```
+## Desarrollo live-reload
 
-    npm run build
+```bash
+npm run live
+```
 
-Open `index.html` to see the result.
+# Despliegue
+3) Crear el bundle.
 
-    open index.html
+```bash
+npm run build
+```
+# Abrir proyecto
+Abrir el `index.html` para ver los resultados.
+
+```bash
+open index.html
+```
