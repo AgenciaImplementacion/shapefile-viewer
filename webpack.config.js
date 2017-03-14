@@ -1,9 +1,11 @@
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
-  entry: './main.js',
+  entry: './src/js/main.js',
   output: {
-    filename: './bundle.js'
+    filename: 'js/main.js',
+    path: path.resolve(__dirname, 'build')
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin()

@@ -28,7 +28,7 @@ npm run live
 ```
 
 # Despliegue
-3) Crear el bundle.
+Crear el bundle.
 
 ```bash
 npm run build
@@ -39,3 +39,6 @@ Abrir el `index.html` para ver los resultados.
 ```bash
 open index.html
 ```
+
+# Conveniciones para construir el projecto
+- https://github.com/kriasoft/Folder-Structure-Conventions

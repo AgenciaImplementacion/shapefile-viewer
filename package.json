@@ -1,7 +1,7 @@
 {
-  "name": "ol-webpack",
+  "name": "openlayers-webpack",
   "version": "1.0.0",
-  "description": "Example using OpenLayers with Webpack",
+  "description": "Ejemplo de uso de Openlayer con Webpack",
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "live": "webpack-dev-server --open"
