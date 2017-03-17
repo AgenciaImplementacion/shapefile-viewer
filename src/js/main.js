@@ -18,3 +18,5 @@ new Map({
     zoom: 5
   })
 });
+
+console.log('hola');

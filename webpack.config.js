@@ -4,7 +4,7 @@ const path = require('path');
 
 const config = {
   entry: {
-    app: './src/main.js'
+    app: './src/js/main.js'
   },
   output: {
     filename: 'bundle.js',
@@ -19,7 +19,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './src/views/index.html'
     }),
     new webpack.optimize.UglifyJsPlugin()
   ],
