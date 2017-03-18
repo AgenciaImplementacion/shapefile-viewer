@@ -1,24 +1,24 @@
-# openlayers-webpack
+# shapefile-viewer
 Visor web básico de datos geográficos.
 
 # Requerimientos
 
+- Openlayers 4
 - Webpack 2
 - nodejs
 - npm
-- Openlayers 4
 
 # Entorno de desarrollo
 1) Clonar el proyecto.
 
 ```bash
-git clone https://github.com/AgenciaImplementacion/openlayers-webpack
+git clone https://github.com/AgenciaImplementacion/shapefile-viewer
 ```
 
 2) Instalar las dependencias.
 
 ```bash
-cd openlayers-webpack
+cd shapefile-viewer
 npm install
 ```
 ## Desarrollo live-reload

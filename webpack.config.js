@@ -1,6 +1,7 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin'); //installed via npm
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
   entry: {
@@ -9,7 +10,6 @@ const config = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build')
-    //publicPath: '/build/'
   },
   devServer: {
     contentBase: path.join(__dirname, "build"),
@@ -17,18 +17,30 @@ const config = {
     compress: true,
     port: 9000
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/views/index.html'
-    }),
-    new webpack.optimize.UglifyJsPlugin()
-  ],
   module: {
     rules: [{
       test: /\.(js|jsx)$/,
       use: 'babel-loader',
       exclude: path.resolve(__dirname, 'node_modules/')
+    }, {
+      test: /\.css$/,
+      use: ExtractTextPlugin.extract({
+        use: 'css-loader'
+      })
     }]
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/views/index.html'
+    }),
+    new ExtractTextPlugin('styles.css'),
+    new webpack.optimize.UglifyJsPlugin()
+  ],
+  resolve: {
+    modules: [
+      "node_modules",
+      path.resolve(__dirname, "src")
+    ]
   }
 };
 
