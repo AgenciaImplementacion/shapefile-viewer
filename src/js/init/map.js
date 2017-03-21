@@ -5,7 +5,7 @@ import View from 'ol/view';
 import TileLayer from 'ol/layer/tile';
 import XYZ from 'ol/source/xyz';
 
-new Map({
+window.map = new Map({
   target: 'map',
   layers: [
     new TileLayer({
