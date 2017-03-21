@@ -27,6 +27,9 @@ const config = {
       use: ExtractTextPlugin.extract({
         use: 'css-loader'
       })
+    }, {
+      test: /\.(gif|png|jpg)$/,
+      use: 'url-loader'
     }]
   },
   plugins: [

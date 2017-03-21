@@ -6,12 +6,13 @@ import Stroke from 'ol/style/stroke';
 import Fill from 'ol/style/fill';
 import Circle from 'ol/style/circle';
 
-$("#file").on("change", function() {
-  console.log('cargando...');
+$('#file').on('change', function() {
+  $('#cargando').removeClass('hidden');
+  console.log('Cargando...');
   loadshp({
     url: document.getElementById('file').files[0], // path or your upload file
     encoding: 'big5', // default utf-8
-    EPSG: 4326 // default 4326 //3826
+    EPSG: 3857 // default 4326 //3826
   }, function(geojson) {
     // geojson returned
     console.log('Cargado.', geojson);
@@ -27,6 +28,7 @@ $("#file").on("change", function() {
     map.addLayer(vectorLayer);
     var extent = vectorLayer.getSource().getExtent();
     map.getView().fit(extent, map.getSize());
+    $('#cargando').addClass('hidden');
   });
 });
 
