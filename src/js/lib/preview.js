@@ -17,13 +17,14 @@
 
 var inputData = {},
 geoData = {},
-EPSGUser, url, encoding, EPSG,
-EPSG4326 = proj4('EPSG:4326');
+EPSGUser, url, encoding, EPSG;
 
 function loadshp(config, returnData) {
     url = config.url;
     encoding = typeof config.encoding != 'utf-8' ? config.encoding : 'utf-8';
     EPSG = typeof config.EPSG != 'undefined' ? config.EPSG : 4326;
+    EPSGMAPA = typeof config.EPSGMAPA != 'undefined' ? config.EPSGMAPA : 'EPSG:3857';
+    EPSGMAPA = proj4(EPSGMAPA);
 
     loadEPSG('http://epsg.io/'+EPSG+'.js', function() {
         if(EPSG == 3821)
@@ -91,7 +92,7 @@ function loadEPSG(url, callback) {
 
 function TransCoord(x, y) {
     if(proj4)
-        var p = proj4(EPSGUser, EPSG4326 , [parseFloat(x), parseFloat(y)]);
+        var p = proj4(EPSGUser, EPSGMAPA , [parseFloat(x), parseFloat(y)]);
     return {x: p[0], y: p[1]};
 }
 

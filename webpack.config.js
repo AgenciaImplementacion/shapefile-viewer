@@ -29,7 +29,7 @@ const config = {
       })
     }, {
       test: /\.(gif|png|jpg)$/,
-      use: 'url-loader'
+      use: 'file-loader'
     }]
   },
   plugins: [
