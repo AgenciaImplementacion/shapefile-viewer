@@ -25,7 +25,12 @@ const config = {
     }, {
       test: /\.css$/,
       use: ExtractTextPlugin.extract({
-        use: 'css-loader'
+        use: [{
+          loader: 'css-loader',
+          options: {
+            minimize: true
+          }
+        }]
       })
     }, {
       test: /\.(gif|png|jpg)$/,

@@ -5,12 +5,14 @@ import Style from 'ol/style/style';
 import Stroke from 'ol/style/stroke';
 import Fill from 'ol/style/fill';
 import Circle from 'ol/style/circle';
+var parseQueryString = require('js/lib/parseQueryString');
 
-$('#file').on('change', function() {
+function cargarShapefile(url) {
   $('#cargando').removeClass('hidden');
   console.log('Cargando...');
   loadshp({
-    url: document.getElementById('file').files[0], // path or your upload file
+    url: url, // path or your upload file
+    //url: document.getElementById('file').files[0], // path or your upload file
     encoding: 'big5', // default utf-8
     EPSG: 3116, // default 4326 //3826
     EPSG: 3857 // Web mercator
@@ -31,6 +33,18 @@ $('#file').on('change', function() {
     map.getView().fit(extent, map.getSize());
     $('#cargando').addClass('hidden');
   });
+}
+
+map.once('postrender', function(event) {
+  var url = parseQueryString.getParams().url;
+  if (url !== undefined) {
+    window.alert();
+    cargarShapefile(url);
+  }
+});
+
+$('#file').on('change', function() {
+  cargarShapefile(document.getElementById('file').files[0]);
 });
 
 var image = new Circle({
