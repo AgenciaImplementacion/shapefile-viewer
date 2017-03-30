@@ -10,3 +10,4 @@ import 'js/lib/preprocess';
 import loadshp from 'js/lib/preview.js';
 window.loadshp = loadshp;
 import 'js/shapefile/subir.js';
+import 'js/shapefile/popup.js';

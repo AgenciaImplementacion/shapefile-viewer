@@ -42,3 +42,8 @@ open index.html
 
 # Conveniciones para construir el projecto
 - https://github.com/kriasoft/Folder-Structure-Conventions
+
+# Basado en
+ - https://github.com/gipong/shp2geojson.js
+ - https://github.com/wavded/js-shapefile-to-geojson
+ - https://www.genbetadev.com/javascript/webpack-gestion-integrada-y-eficiente-de-tus-assets

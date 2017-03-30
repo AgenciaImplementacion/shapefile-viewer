@@ -12,7 +12,6 @@ function cargarShapefile(url) {
   console.log('Cargando...');
   loadshp({
     url: url, // path or your upload file
-    //url: document.getElementById('file').files[0], // path or your upload file
     encoding: 'big5', // default utf-8
     EPSG: 3116, // default 4326 //3826
     EPSG: 3857 // Web mercator
@@ -38,7 +37,6 @@ function cargarShapefile(url) {
 map.once('postrender', function(event) {
   var url = parseQueryString.getParams().url;
   if (url !== undefined) {
-    window.alert();
     cargarShapefile(url);
   }
 });

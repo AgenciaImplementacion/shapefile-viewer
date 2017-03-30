@@ -4,10 +4,15 @@
 <head>
     <meta charset="utf-8">
     <title>Visor</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
     <div id="map"></div>
+    <div id="popup" class="ol-popup">
+        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+        <div id="popup-content"></div>
+    </div>
     <div id="shapefile-container">
         <i class="file archive outline icon"></i>
         <input type="file" id="file" accept=".zip">
