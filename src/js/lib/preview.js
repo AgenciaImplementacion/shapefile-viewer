@@ -26,7 +26,7 @@ function loadshp(config, returnData) {
     EPSGMAPA = typeof config.EPSGMAPA != 'undefined' ? config.EPSGMAPA : 'EPSG:3857';
     EPSGMAPA = proj4(EPSGMAPA);
 
-    loadEPSG('http://epsg.io/'+EPSG+'.js', function() {
+    loadEPSG('//epsg.io/'+EPSG+'.js', function() {
         if(EPSG == 3821)
             proj4.defs([
                 ['EPSG:3821', '+proj=tmerc +ellps=GRS67 +towgs84=-752,-358,-179,-.0000011698,.0000018398,.0000009822,.00002329 +lat_0=0 +lon_0=121 +x_0=250000 +y_0=0 +k=0.9999 +units=m +no_defs']
