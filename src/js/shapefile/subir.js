@@ -5,12 +5,33 @@ import Style from 'ol/style/style';
 import Stroke from 'ol/style/stroke';
 import Fill from 'ol/style/fill';
 import Circle from 'ol/style/circle';
+import Point from 'ol/geom/point';
 var parseQueryString = require('js/lib/parseQueryString');
+
+var jsts = require('js/lib/jsts');
+var jstsParser = new jsts.io.OL3Parser();
+
+function bufferGeometry(geometry, meters) {
+  meters = (typeof meters !== 'undefined') ?
+    meters :
+    0;
+
+  var sourceProj = window.map.getView().getProjection();
+  var transformedGeometry = (geometry.clone().transform(sourceProj, 'EPSG:3857'));
+  var jstsGeom = jstsParser.read(transformedGeometry); //Only accept 3857
+  console.log('jstsGeom', jstsGeom);
+  // create a buffer of 1 meters around each line
+  var buffered = jstsGeom.buffer(meters);
+
+  // convert back from JSTS and replace the geometry on the feature
+  var bufferedGeometry = window.jstsParser.write(buffered);
+  return bufferedGeometry.transform('EPSG:3857', sourceProj);
+}
 
 function cargarShapefile(url) {
   $('#cargando').removeClass('hidden');
   console.log('Cargando...');
-  loadshp({
+  window.loadshp({
     url: url, // path or your upload file
     encoding: 'big5', // default utf-8
     EPSG: 3116, // default 4326 //3826
@@ -19,6 +40,11 @@ function cargarShapefile(url) {
     console.log('Cargado.', geojson);
     // geojson returned
     window.geojsonObject = geojson;
+    var features = geojson.features;
+    if (features.length === 0){
+      window.alert('No se han encontrado datos en el archivo.');
+      $('#cargando').addClass('hidden');
+    }
     var source = new VectorSource({
       features: (new GeoJSON()).readFeatures(geojson)
     });
@@ -28,8 +54,19 @@ function cargarShapefile(url) {
     });
     window.vectorLayer = vectorLayer;
     map.addLayer(vectorLayer);
-    var extent = vectorLayer.getSource().getExtent();
+    var extent = null;
+    var geometry = features[0].geometry;
+    if (features.length === 1 && geometry.type == 'Point'){
+      console.log('geometry', geometry);
+      var newGeometry = new Point(geometry.coordinates);
+      extent = bufferGeometry(newGeometry, 10);
+    } else {
+      extent = vectorLayer.getSource().getExtent()
+    }
     map.getView().fit(extent, map.getSize());
+    $('#cargando').addClass('hidden');
+  }, function(error) {
+    window.alert('Error: ' + error);
     $('#cargando').addClass('hidden');
   });
 }
@@ -42,6 +79,7 @@ map.once('postrender', function(event) {
 });
 
 $('#file').on('change', function() {
+  console.log('dsdf', document.getElementById('file').files[0]);
   cargarShapefile(document.getElementById('file').files[0]);
 });
 
