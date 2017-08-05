@@ -2,6 +2,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+console.log('process.env.ENV', process.env.ENV);
+var ENVIRONMENT = process.env.ENV || 'dev';
 
 const config = {
   entry: {
@@ -37,13 +39,20 @@ const config = {
       use: 'file-loader'
     }]
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/views/index.html'
-    }),
-    new ExtractTextPlugin('styles.css'),
-    new webpack.optimize.UglifyJsPlugin()
-  ],
+  plugins: (ENVIRONMENT === 'prod') ?
+    [
+      new HtmlWebpackPlugin({
+        template: './src/views/index.html'
+      }),
+      new ExtractTextPlugin('styles.css'),
+      new webpack.optimize.UglifyJsPlugin()
+    ] :
+    [
+      new HtmlWebpackPlugin({
+        template: './src/views/index.html'
+      }),
+      new ExtractTextPlugin('styles.css')
+    ],
   resolve: {
     modules: [
       "node_modules",

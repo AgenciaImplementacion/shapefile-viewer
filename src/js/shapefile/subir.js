@@ -8,7 +8,8 @@ import Circle from 'ol/style/circle';
 import Point from 'ol/geom/point';
 var parseQueryString = require('js/lib/parseQueryString');
 
-var jsts = require('js/lib/jsts');
+var {jsts} = require('js/lib/jsts');
+window.jsts = jsts;
 var jstsParser = new jsts.io.OL3Parser();
 
 function bufferGeometry(geometry, meters) {
@@ -24,7 +25,7 @@ function bufferGeometry(geometry, meters) {
   var buffered = jstsGeom.buffer(meters);
 
   // convert back from JSTS and replace the geometry on the feature
-  var bufferedGeometry = window.jstsParser.write(buffered);
+  var bufferedGeometry = jstsParser.write(buffered);
   return bufferedGeometry.transform('EPSG:3857', sourceProj);
 }
 
@@ -59,7 +60,7 @@ function cargarShapefile(url) {
     if (features.length === 1 && geometry.type == 'Point'){
       console.log('geometry', geometry);
       var newGeometry = new Point(geometry.coordinates);
-      extent = bufferGeometry(newGeometry, 10);
+      extent = bufferGeometry(newGeometry, 100); // metros
     } else {
       extent = vectorLayer.getSource().getExtent()
     }
