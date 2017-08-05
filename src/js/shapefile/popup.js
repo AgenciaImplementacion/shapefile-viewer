@@ -9,8 +9,8 @@ select_interaction.on('select', function(evt) {
   var coordinate = evt.mapBrowserEvent.coordinate;
   var message = lastFeature.getProperties().message;
   var objtag = lastFeature.getProperties().objtag;
-  content.innerHTML = '<p>Mensaje: ' + message + '</p><br>' +
-    '<p>Tag: ' + objtag + '</p>';
+  content.innerHTML = '<b>Mensaje:</b> ' + message + '<br>' +
+    '<b>Tag:</b> ' + objtag + '';
   window.overlay.setPosition(coordinate);
 });
 

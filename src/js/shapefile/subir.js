@@ -8,7 +8,9 @@ import Circle from 'ol/style/circle';
 import Point from 'ol/geom/point';
 var parseQueryString = require('js/lib/parseQueryString');
 
-var {jsts} = require('js/lib/jsts');
+var {
+  jsts
+} = require('js/lib/jsts');
 window.jsts = jsts;
 var jstsParser = new jsts.io.OL3Parser();
 
@@ -42,7 +44,7 @@ function cargarShapefile(url) {
     // geojson returned
     window.geojsonObject = geojson;
     var features = geojson.features;
-    if (features.length === 0){
+    if (features.length === 0) {
       window.alert('No se han encontrado datos en el archivo.');
       $('#cargando').addClass('hidden');
     }
@@ -57,7 +59,7 @@ function cargarShapefile(url) {
     map.addLayer(vectorLayer);
     var extent = null;
     var geometry = features[0].geometry;
-    if (features.length === 1 && geometry.type == 'Point'){
+    if (features.length === 1 && geometry.type == 'Point') {
       console.log('geometry', geometry);
       var newGeometry = new Point(geometry.coordinates);
       extent = bufferGeometry(newGeometry, 100); // metros
@@ -85,10 +87,12 @@ $('#file').on('change', function() {
 });
 
 var image = new Circle({
-  radius: 5,
-  fill: null,
+  radius: 7,
+  fill: new Fill({
+    color: 'rgba(94, 186, 167, 0.75)'
+  }),
   stroke: new Stroke({
-    color: 'red',
+    color: '#1ab394',
     width: 1
   })
 });
