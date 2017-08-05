@@ -2,8 +2,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-console.log('process.env.ENV', process.env.ENV);
-var ENVIRONMENT = process.env.ENV || 'dev';
 
 const config = {
   entry: {
@@ -22,7 +20,12 @@ const config = {
   module: {
     rules: [{
       test: /\.(js|jsx)$/,
-      use: 'babel-loader',
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['es2015']
+        }
+      },
       exclude: path.resolve(__dirname, 'node_modules/')
     }, {
       test: /\.css$/,
@@ -39,20 +42,13 @@ const config = {
       use: 'file-loader'
     }]
   },
-  plugins: (ENVIRONMENT === 'prod') ?
-    [
-      new HtmlWebpackPlugin({
-        template: './src/views/index.html'
-      }),
-      new ExtractTextPlugin('styles.css'),
-      new webpack.optimize.UglifyJsPlugin()
-    ] :
-    [
-      new HtmlWebpackPlugin({
-        template: './src/views/index.html'
-      }),
-      new ExtractTextPlugin('styles.css')
-    ],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/views/index.html'
+    }),
+    new ExtractTextPlugin('styles.css'),
+    new webpack.optimize.UglifyJsPlugin()
+  ],
   resolve: {
     modules: [
       "node_modules",
