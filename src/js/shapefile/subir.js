@@ -6,7 +6,6 @@ import Stroke from 'ol/style/stroke';
 import Fill from 'ol/style/fill';
 import Circle from 'ol/style/circle';
 import Point from 'ol/geom/point';
-var parseQueryString = require('js/lib/parseQueryString');
 
 var jsts = require('js/lib/jsts');
 jsts = jsts.jsts;
@@ -67,17 +66,13 @@ function cargarShapefile(url) {
     map.getView().fit(extent, map.getSize());
     $('#cargando').addClass('hidden');
   }, function(error) {
+    console.log('cargarShapefile error', error);
     window.alert('Error: ' + error);
     $('#cargando').addClass('hidden');
   });
 }
 
-map.once('postrender', function(event) {
-  var url = parseQueryString.getParams().url;
-  if (url !== undefined) {
-    cargarShapefile(url);
-  }
-});
+window.cargarShapefile = cargarShapefile;
 
 $('#file').on('change', function() {
   console.log('dsdf', document.getElementById('file').files[0]);

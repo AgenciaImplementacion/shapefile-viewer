@@ -6,6 +6,8 @@ import TileLayer from 'ol/layer/tile';
 import XYZ from 'ol/source/xyz';
 import Overlay from 'ol/overlay';
 
+var parseQueryString = require('js/lib/parseQueryString');
+
 /**
  * Elements that make up the popup.
  */
@@ -49,4 +51,22 @@ window.map = new Map({
     center: [-8225765.834050851, 510148.56872624764],
     zoom: 5
   })
+});
+
+$(function(){
+  window.map.once('postrender', function(event) {
+    var url = parseQueryString.getParams().url;
+    console.log('leyendo por url', url);
+    if (url !== undefined) {
+      var cargar = function(){
+        if(typeof window.cargarShapefile === 'undefined'){
+          setTimeout(function(){
+            cargar();
+          },500);
+        }
+        window.cargarShapefile(url);
+      }
+      cargar();
+    }
+  });
 });
