@@ -4,7 +4,7 @@
   "description": "Ejemplo de uso de Openlayer con Webpack",
   "scripts": {
     "start": "webpack-dev-server --progress --colors",
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack --config webpack.config.js --optimize-minimize",
     "watch": "webpack --watch --colors",
     "pack": "echo 'make .tar.gz'"
   },

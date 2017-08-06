@@ -8,10 +8,8 @@ import Circle from 'ol/style/circle';
 import Point from 'ol/geom/point';
 var parseQueryString = require('js/lib/parseQueryString');
 
-var {
-  jsts
-} = require('js/lib/jsts');
-window.jsts = jsts;
+var jsts = require('js/lib/jsts');
+jsts = jsts.jsts;
 var jstsParser = new jsts.io.OL3Parser();
 
 function bufferGeometry(geometry, meters) {
