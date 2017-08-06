@@ -20,12 +20,7 @@ const config = {
   module: {
     rules: [{
       test: /\.(js|jsx)$/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['es2015']
-        }
-      },
+      use: 'babel-loader',
       exclude: path.resolve(__dirname, 'node_modules/')
     }, {
       test: /\.css$/,
@@ -46,8 +41,7 @@ const config = {
     new HtmlWebpackPlugin({
       template: './src/views/index.html'
     }),
-    new ExtractTextPlugin('styles.css'),
-    new webpack.optimize.UglifyJsPlugin()
+    new ExtractTextPlugin('styles.css')
   ],
   resolve: {
     modules: [

@@ -8,11 +8,11 @@
  *
  */
 
-var geojsonData = {};
+window.geojsonData = {};
 
 // Shapefile parser, following the specification at
 // http://www.esri.com/library/whitepapers/pdfs/shapefile.pdf
-var SHP = {
+window.SHP = {
     NULL: 0,
     POINT: 1,
     POLYLINE: 3,
@@ -27,7 +27,7 @@ SHP.getShapeName = function(id) {
     }
 };
 
-var SHPParser = function() {};
+window.SHPParser = function() {};
 
 SHPParser.load = function(url, callback, returnData) {
     var xhr = new XMLHttpRequest();
@@ -150,9 +150,9 @@ SHPParser.prototype.parseShape = function(dv, idx, length) {
      */
 
     // Creates global namespace.
-var DBF = {};
+window.DBF = {};
 
-var DBFParser = function() {};
+window.DBFParser = function() {};
 
 DBFParser.load = function(url, encoding, callback, returnData) {
     var xhr = new XMLHttpRequest();

@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Ejemplo de uso de Openlayer con Webpack",
   "scripts": {
+    "start": "webpack-dev-server --progress --colors",
     "build": "webpack --config webpack.config.js",
-    "live": "webpack-dev-server --progress --colors",
     "watch": "webpack --watch --colors",
     "pack": "echo 'make .tar.gz'"
   },
